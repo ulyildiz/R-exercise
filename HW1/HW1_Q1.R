@@ -14,16 +14,13 @@ productMax <- max(defProduct)
 productQuartiles <- quantile(defProduct, prob = c(0.25, 0.5, 0.75))
 summary(defProduct) ## test to be sure
 
-hist(defProduct, freq = TRUE) ## 
+br <- seq(min(defProduct) - 0.5,
+          max(defProduct) + 0.5, by = 1)
 
-boxplot(defProduct) ## there is no outliner data
+hist(defProduct, breaks = br)
+axis(1, at = floor(min(defProduct)):ceiling(max(defProduct)))
+
+boxplot(defProduct) ## there is no out liner data
 ## % ratio
 overFiveDef <- length(defProduct[defProduct > 5]) / length(defProduct) * 100
-
-##package for plotting
-df <- data.frame(defProduct)
-ggplot(df, aes(defProduct)) +
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "gray20", alpha = 1) +
-  geom_freqpoly(binwidth = 1, linewidth = 1.2, color = "steelblue4") +
-  labs(title = "Histogram + Frekans Poligonu", x = "Değer", y = "Frekans")
 
